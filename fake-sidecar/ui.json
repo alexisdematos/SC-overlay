@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "updatedAt": "2023-11-14T22:13:20Z",
+  "status": "Fake service: frozen data",
+  "warnings": [],
+  "ship": {
+    "name": "Cutlass",
+    "capacity": 46,
+    "auto": false
+  },
+  "start": {
+    "place": null,
+    "source": "log"
+  },
+  "contracts": [
+    {
+      "id": "m1",
+      "title": "Haul",
+      "code": "H1",
+      "tracked": true,
+      "sharedWith": [],
+      "legs": [
+        {
+          "id": "m1:0",
+          "cargo": "Agricium",
+          "scu": 11,
+          "from": "Lorville",
+          "to": null,
+          "sure": "?",
+          "fromTeam": null,
+          "picked": false,
+          "delivered": false
+        }
+      ]
+    }
+  ],
+  "total": {
+    "scu": 11,
+    "capacity": 46
+  },
+  "route": [],
+  "routeLines": [
+    "Lorville: pick up 11 SCU Agricium",
+    "Area18: drop 11 SCU"
+  ],
+  "planning": false,
+  "trade": {
+    "on": false,
+    "suggestions": [],
+    "error": null,
+    "fetching": false,
+    "budget": null
+  },
+  "heading": null,
+  "aboard": null,
+  "team": {
+    "code": null,
+    "name": null,
+    "self": null,
+    "error": null,
+    "reading": false,
+    "readError": null,
+    "members": []
+  },
+  "settings": {
+    "trade": false,
+    "trade_illegal": false,
+    "auto_showlocation": false,
+    "live_server": true,
+    "hide_outside_game": true,
+    "close_with_game": true,
+    "read_contract_page": true,
+    "click_through": false,
+    "auto_update": true,
+    "view": "cargo",
+    "alpha": 0.85
+  },
+  "lists": {
+    "places": [
+      {
+        "name": "Lorville",
+        "body": "Hurston",
+        "system": "Stanton"
+      },
+      {
+        "name": "Area18",
+        "body": "Hurston",
+        "system": "Stanton"
+      }
+    ],
+    "ships": [
+      "Cutlass",
+      "Hull C"
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "SC-overlay",
+  "version": "0.1.0",
+  "identifier": "fr.weekera.sc-overlay",
+  "build": {
+    "frontendDist": "../ui"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "url": "index.html",
+        "title": "SC-overlay",
+        "width": 1280,
+        "height": 720,
+        "x": 0,
+        "y": 0,
+        "transparent": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "resizable": false,
+        "shadow": false,
+        "focus": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost http://127.0.0.1:* https://versetime-api.ofs.workers.dev; frame-src https://versetime.ofs.workers.dev",
+      "devCsp": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost http://127.0.0.1:* https://versetime-api.ofs.workers.dev; frame-src https://versetime.ofs.workers.dev http://127.0.0.1:8093"
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEExN0M2M0ZBREUxMkFDRDEKUldUUnJCTGUrbU44b1ZLZG9CSmhTVENaR0FxczladzluZExqZ2xUYkN2R01tU1liTUthcThGQ3EK",
+      "endpoints": ["https://github.com/alexisdematos/SC-overlay/releases/latest/download/latest.json"]
+    }
+  },
+  "bundle": {
+    "active": true,
+    "createUpdaterArtifacts": true,
+    "targets": ["nsis"],
+    "icon": ["icons/icon.ico", "icons/icon.png"],
+    "externalBin": ["binaries/schauling-service"],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser"
+      }
+    }
+  }
+}

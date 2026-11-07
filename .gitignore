@@ -1,0 +1,8 @@
+src-tauri/target/
+src-tauri/gen/
+src-tauri/binaries/
+node_modules/
+# Cle privee de signature des mises a jour: ne jamais versionner
+*.key
+*.key.pub.bak
+.tauri/

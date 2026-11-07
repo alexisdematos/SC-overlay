@@ -1,0 +1,189 @@
+:root {
+  --ink: #e8eef7;
+  --muted: #9fb0c6;
+  --panel: rgba(14, 20, 30, 0.82);
+  --line: rgba(120, 170, 230, 0.45);
+  --accent: #5aaaff;
+  --bad: #ff7a7a;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: transparent;
+  color: var(--ink);
+  font: 14px/1.4 "Segoe UI", system-ui, sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Out of the game mode the game behind is dimmed, so the widgets read well (the level is set in Settings) */
+:root { --dim: 0.55; }
+body.mode-interaction, body.mode-edit { background: rgba(4, 8, 14, var(--dim)); }
+
+#bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 440px) minmax(0, 1fr); /* left | search in the middle | right */
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+#bar[hidden] { display: none; }
+.bar-left, .bar-right { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.bar-left { justify-content: flex-start; flex-wrap: nowrap; overflow: hidden; }
+.bar-right { justify-content: flex-end; flex-wrap: wrap; }
+#flash {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: rgba(10, 16, 26, 0.9);
+  color: var(--ink);
+  pointer-events: none;
+}
+#flash[hidden] { display: none; }
+#profiles { display: inline-flex; align-items: center; gap: 4px; }
+#profiles[hidden] { display: none; }
+#settings {
+  position: fixed;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 92vw);
+  max-height: 76vh;
+  overflow: auto;
+  padding: 10px 14px;
+  background: rgba(14, 20, 30, 0.97);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  z-index: 20;
+  user-select: text;
+}
+#settings[hidden] { display: none; }
+#settings h3 { margin: 12px 0 4px; font-size: 13px; color: var(--muted); text-transform: uppercase; }
+.settings-head { display: flex; align-items: center; justify-content: space-between; }
+.keylabel { width: 120px; }
+.keyfield { width: 150px; text-align: center; cursor: pointer; }
+.profilefield { flex: 1; min-width: 120px; }
+.settings-message { min-height: 1.2em; margin: 8px 0 0; }
+.spacer { flex: 1; }
+
+button {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font: inherit;
+  cursor: pointer;
+}
+button:hover { border-color: var(--accent); }
+
+.pill { padding: 1px 8px; border-radius: 10px; border: 1px solid var(--line); color: var(--muted); }
+.pill.ok { color: var(--accent); }
+.pill.error { color: var(--bad); border-color: var(--bad); }
+.notice { color: var(--bad); }
+
+.widget {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  min-height: 60px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 10px;
+  opacity: var(--widget-opacity, 0.85);
+  pointer-events: none; /* game mode: nothing to click */
+  overflow: hidden;
+}
+.widget[hidden] { display: none; }
+.wbody { flex: 1; min-height: 0; overflow: hidden; }
+.wbody p { margin: 2px 0; }
+.wbody .pre { white-space: pre; font-family: Consolas, "Cascadia Mono", monospace; font-size: 12px; }
+.wbody .muted, .muted { color: var(--muted); }
+.wbody .warn, .warn { color: var(--bad); }
+.wbody .done { text-decoration: line-through; color: var(--muted); }
+.wbody .picked { color: var(--accent); }
+.contract { margin: 6px 0; padding-top: 4px; border-top: 1px solid var(--line); }
+.row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin: 3px 0; }
+.gauge { display: flex; align-items: center; margin: 4px 0; }
+.gauge progress { flex: 1; height: 10px; }
+button.small { padding: 0 8px; font-size: 12px; }
+
+input[type="text"], select {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font: inherit;
+  max-width: 190px;
+}
+select option { background: #101722; color: var(--ink); }
+
+.map-frame { width: 100%; height: 100%; border: 0; background: transparent; }
+.mode-edit .map-frame { pointer-events: none; } /* dragging the widget, not the map */
+
+.wbar, .handle { display: none; }
+
+.mode-interaction .widget, .mode-edit .widget { pointer-events: auto; }
+.mode-interaction .wbody, .mode-edit .wbody { overflow: auto; }
+.mode-edit .widget { outline: 1px dashed var(--accent); cursor: move; user-select: none; }
+.mode-edit .wbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+.wtitle { flex: 1; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.wbar .opacity { width: 70px; }
+.mode-edit .handle {
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  cursor: nwse-resize;
+  background: linear-gradient(135deg, transparent 50%, var(--accent) 50%);
+}
+
+#palette {
+  position: fixed;
+  top: 46px; /* a list under the search field of the bar, which is in the middle */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(640px, 92vw);
+  max-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  background: rgba(14, 20, 30, 0.96);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  z-index: 10;
+  user-select: text;
+}
+#palette[hidden] { display: none; }
+#palette-input { width: 100%; box-sizing: border-box; max-width: none; }
+#palette-status { margin: 4px 2px; min-height: 1.2em; }
+#palette-results { overflow: auto; }
+.result { padding: 6px 8px; border-radius: 4px; border: 1px solid transparent; }
+.result.selected { border-color: var(--line); background: rgba(90, 170, 255, 0.08); }
+.result p { margin: 2px 0; }
+

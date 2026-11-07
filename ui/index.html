@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SC-overlay</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="mode-game">
+  <header id="bar" hidden>
+    <div class="bar-left">
+      <strong>SC-overlay</strong>
+      <span id="link" class="pill">connecting</span>
+      <span id="notice" class="notice" hidden></span>
+    </div>
+    <input id="palette-input" type="text" placeholder="Search a place, a ship, an item..." autocomplete="off" spellcheck="false" maxlength="60">
+    <div class="bar-right">
+      <span id="profiles" hidden>
+        <select id="profile" title="Layout profile"></select>
+      </span>
+      <select id="add" hidden></select>
+      <button id="settings-btn" type="button">Settings</button>
+      <button id="back" type="button">Back to game (Alt+O)</button>
+      <button id="edit" type="button">Edit layout</button>
+      <button id="quit" type="button">Quit</button>
+    </div>
+  </header>
+  <main id="widgets"></main>
+  <div id="flash" hidden></div>
+  <div id="settings" tabindex="-1" hidden></div>
+  <div id="palette" hidden>
+    <p id="palette-status" class="muted"></p>
+    <div id="palette-results"></div>
+  </div>
+  <script type="module" src="js/overlay.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+fil d'ariane se replacer bien sur la planète/système, dézoomer sur la map a plat
+
+
+truc team reste bleu quand on décoche, et si masqué, réapparait dès qu'il y a une maj
+pas de pouette pouette pour masquer ou afficher contracts
+
+
+obligé de rejoindre temas depuis overlay, si team créé depuis site et qu'on rejoins depuis site, pas bien syncrho
+
+si non show only over the game et qu'on est sur popup join team, qu'on fait alt tab, ça part en sucette
+
+ajouter une chips "shared with me" dans les contrats
+
+
+dans le cas où Helmarok me partage une quete, puis il l'annule, la quete disparait bien de son côté (overlay + map), chez moi la quete reste sur mon overlay avec "From Helmarok", mais je perd les infos sur la map
+
+
++ potentiellement OCR pour route complexe avec étapes
