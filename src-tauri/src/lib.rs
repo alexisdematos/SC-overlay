@@ -532,6 +532,35 @@ async fn install_update(app: AppHandle) -> Result<(), String> {
     Ok(())
 }
 
+/// An icon in the notification area: the overlay has no taskbar button, this shows it is running.
+/// Left click switches game / interaction (like the hotkey), the menu has the same and Quit.
+fn setup_tray(app: &AppHandle) -> tauri::Result<()> {
+    use tauri::menu::{Menu, MenuItem};
+    use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent};
+    let toggle = MenuItem::with_id(app, "toggle", "Switch game / interaction", true, None::<&str>)?;
+    let quit = MenuItem::with_id(app, "quit", "Quit SC-overlay", true, None::<&str>)?;
+    let menu = Menu::with_items(app, &[&toggle, &quit])?;
+    let mut builder = TrayIconBuilder::with_id("main")
+        .tooltip("SC-overlay")
+        .menu(&menu)
+        .show_menu_on_left_click(false)
+        .on_menu_event(|app, event| match event.id().as_ref() {
+            "toggle" => fire(app, Action::Toggle),
+            "quit" => app.exit(0),
+            _ => {}
+        })
+        .on_tray_icon_event(|tray, event| {
+            if let TrayIconEvent::Click { button: MouseButton::Left, button_state: MouseButtonState::Up, .. } = event {
+                fire(tray.app_handle(), Action::Toggle);
+            }
+        });
+    if let Some(icon) = app.default_window_icon() {
+        builder = builder.icon(icon.clone());
+    }
+    builder.build(app)?;
+    Ok(())
+}
+
 fn setup_window(app: &AppHandle) {
     let Some(w) = main_window(app) else { return };
     // Cover the primary monitor (the game runs borderless on it).
@@ -609,6 +638,9 @@ pub fn run() {
             // After the single-instance check: a second launch must not leave a service behind.
             app.manage(sidecar::start());
             setup_window(&handle);
+            if let Err(e) = setup_tray(&handle) {
+                warn(&handle, &format!("no tray icon: {e}"));
+            }
             let keys = app.state::<AppState>().keys.lock().unwrap().clone();
             for error in register_all(&handle, &keys) {
                 warn(&handle, &error);
